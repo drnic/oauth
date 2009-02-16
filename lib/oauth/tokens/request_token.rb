@@ -11,8 +11,7 @@ module OAuth
 
     # exchange for AccessToken on server
     def get_access_token(options = {}, *arguments)
-      response = consumer.token_request(consumer.http_method, (consumer.access_token_url? ? consumer.access_token_url : consumer.access_token_path), self, options, *arguments)
-      OAuth::AccessToken.from_hash(consumer, response)
+      consumer.get_access_token(self, options, *arguments)
     end
 
   protected
