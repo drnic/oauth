@@ -9,6 +9,12 @@ module OAuth
       build_authorize_url(consumer.authorize_url, params)
     end
 
+    # Generate an authentication URL for sign-in user authentication
+    def authenticate_url(params = nil)
+      params = (params || {}).merge(:oauth_token => self.token)
+      build_authorize_url(consumer.authenticate_url, params)
+    end
+
     # exchange for AccessToken on server
     def get_access_token(options = {}, *arguments)
       response = consumer.token_request(consumer.http_method, (consumer.access_token_url? ? consumer.access_token_url : consumer.access_token_path), self, options, *arguments)

@@ -23,6 +23,7 @@ module OAuth
       # default paths on site. These are the same as the defaults set up by the generators
       :request_token_path => '/oauth/request_token',
       :authorize_path     => '/oauth/authorize',
+      :authenticate_path  => '/oauth/authenticate',
       :access_token_path  => '/oauth/access_token',
 
       # How do we send the oauth values to the server see
@@ -196,6 +197,10 @@ module OAuth
       @options[:authorize_path]
     end
 
+    def authenticate_path
+      @options[:authenticate_path]
+    end
+
     def access_token_path
       @options[:access_token_path]
     end
@@ -215,6 +220,14 @@ module OAuth
 
     def authorize_url?
       @options.has_key?(:authorize_url)
+    end
+
+    def authenticate_url
+      @options[:authenticate_url] || site + authenticate_path
+    end
+
+    def authenticate_url?
+      @options.has_key?(:authenticate_url)
     end
 
     def access_token_url
